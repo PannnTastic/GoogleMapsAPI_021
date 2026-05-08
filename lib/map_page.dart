@@ -137,7 +137,29 @@ class _MapPageState extends State<MapPage> {
         title: const Text("Pilih Alamat"),
       ),
       body: SafeArea(
-
+        child: Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: _initialcamera!,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
+              mapType: MapType.normal,
+              compassEnabled: true,
+              tiltGesturesEnabled: true,
+              scrollGesturesEnabled: true,
+              zoomControlsEnabled: true,
+              rotateGesturesEnabled: true,
+              trafficEnabled: true,
+              buildingsEnabled: true,
+              indoorViewEnabled: true,
+              onMapCreated: (GoogleMapController ctrl){
+                _ctrl.complete(ctrl);
+              },
+              markers: _pickedMarker != null ? {_pickedMarker!} : {},
+              onTap: _onTap,
+            )
+          ],
+        ),
       ),
     );
   }
